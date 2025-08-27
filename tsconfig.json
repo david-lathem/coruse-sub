@@ -9,6 +9,7 @@
     "forceConsistentCasingInFileNames": true /* Ensure that casing is correct in imports. */,
     "resolveJsonModule": true, // Able to import json as ts doesnt do by default,
     "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "strict": true /* Enable all strict type-checking options. */
   },
   "include": ["src"] // specifies what files will be included in outdir

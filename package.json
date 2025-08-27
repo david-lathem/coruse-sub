@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "start": "npm run build && node --env-file=.env dist/index.js",
-    "dev": "tsc-watch --onSuccess \"node --env-file=.env ./dist/index.js\"",
+    "dev": "tsc-watch --onCompilationComplete  \"node --env-file=.env ./dist/index.js\"",
     "build": "rimraf dist && tsc"
   },
   "type": "module",
@@ -21,7 +21,9 @@
   },
   "dependencies": {
     "@typegoose/typegoose": "^12.17.0",
+    "cron": "^4.3.3",
     "discord.js": "^14.18.0",
-    "mongoose": "^8.16.4"
+    "mongoose": "^8.16.4",
+    "stripe": "^18.3.0"
   }
 }

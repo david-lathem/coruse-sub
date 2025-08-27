@@ -3,7 +3,7 @@ import { handleInteractionError } from "../../utils/interaction.js";
 
 export default async (interaction: BaseInteraction) => {
   try {
-    if (interaction.isChatInputCommand()) {
+    if (interaction.isChatInputCommand() && interaction.inCachedGuild()) {
       const command = interaction.client.commands.find(
         (c) => c.name === interaction.commandName
       );

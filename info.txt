@@ -1,0 +1,8 @@
+1. Full access for 3 months and recurring 1/3 months sub
+2. User must buy full access first one time only.
+3. But stripe saves those as guest customers that we cant retreive via api. Only sub buyer emails are stored as real customers.
+4. So edit the payment to save info for future use cause it to save as real customer even as one time buy.
+5. Now when customer verifies, we need to find if he has bought a full time access ever.
+6. When someone buys, payment intent creates, customer creates, charge succeeds, payment mehtod attahced, intent succed, chekcout sessio complete
+7. Paymen intent doesnt include any useful data for identifying what product user boguht, includes amount. so we grab checkout usign customer id andpayment link id which help us identify.
+8. When someone buys one time + subcribtion, two customer are created. So in verify we use loop to get all customers and get checkout for full time

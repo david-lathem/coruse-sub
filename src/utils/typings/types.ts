@@ -12,5 +12,5 @@ export interface extendedAPICommand
   autocomplete?(
     interaction: AutocompleteInteraction
   ): Promise<Array<ApplicationCommandOptionChoiceData | string>>;
-  execute(interaction: ChatInputCommandInteraction): Promise<any>;
+  execute(interaction: ChatInputCommandInteraction<"cached">): Promise<any>;
 }
