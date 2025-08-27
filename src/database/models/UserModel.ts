@@ -1,5 +1,6 @@
-import { prop, getModelForClass } from "@typegoose/typegoose";
+import { prop, getModelForClass, modelOptions } from "@typegoose/typegoose";
 
+@modelOptions({ options: { customName: "subscription_users" } })
 class User {
   @prop({ required: true, unique: true })
   public discordUserId!: string;
