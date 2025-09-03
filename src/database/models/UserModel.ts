@@ -13,6 +13,9 @@ class User {
 
   @prop({ default: false })
   public reminderSent?: Boolean;
+
+  @prop({ default: false })
+  public shouldIgnoreInJob?: Boolean;
 }
 
 export const UserModel = getModelForClass(User);
