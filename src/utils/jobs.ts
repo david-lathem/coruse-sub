@@ -96,13 +96,13 @@ export const checkCustomerSubscriptions = async (client: Client<true>) => {
         if (!userOldSubStatus) text = MESSAGE_CONFIG.SUB_RENEWED;
         if (userOldSubStatus && roleAdded) text = MESSAGE_CONFIG.ROLE_ADDED; // if user had active sub before loop and now still active but role added
 
-        let reminderTime = 1000 * 60 * 60 * 24 * 7;
+        let reminderTime = 1000 * 60 * 60 * 24 * 83;
 
         if (process.env.NODE_ENV === "development")
           reminderTime = 1000 * 60 * 5;
 
         const shouldSendReminder =
-          Date.now() - (activeSession?.created ?? 0) * 1000 <= reminderTime;
+          Date.now() - (activeSession?.created ?? 0) * 1000 >= reminderTime;
 
         if (activeSession && !user.reminderSent && shouldSendReminder) {
           text = MESSAGE_CONFIG.REMINDER;
