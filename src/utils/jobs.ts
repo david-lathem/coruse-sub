@@ -24,6 +24,7 @@ export const checkCustomerSubscriptions = async (client: Client<true>) => {
 
   for (const user of users ?? []) {
     try {
+      if (user.shouldIgnoreInJob) continue;
       const userOldSubStatus = user.hasSubActive;
       let hasSubFinished: boolean = true; // we assume it is at start, below, it might prove us wrong
 
@@ -94,6 +95,19 @@ export const checkCustomerSubscriptions = async (client: Client<true>) => {
 
         if (!userOldSubStatus) text = MESSAGE_CONFIG.SUB_RENEWED;
         if (userOldSubStatus && roleAdded) text = MESSAGE_CONFIG.ROLE_ADDED; // if user had active sub before loop and now still active but role added
+
+        let reminderTime = 1000 * 60 * 60 * 24 * 7;
+
+        if (process.env.NODE_ENV === "development")
+          reminderTime = 1000 * 60 * 5;
+
+        const shouldSendReminder =
+          Date.now() - (activeSession?.created ?? 0) * 1000 <= reminderTime;
+
+        if (activeSession && !user.reminderSent && shouldSendReminder) {
+          text = MESSAGE_CONFIG.REMINDER;
+          await user.updateOne({ reminderSent: true });
+        }
       }
 
       if (text) await member.send(text).catch(console.error);

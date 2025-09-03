@@ -13,7 +13,7 @@ export const getAnyActiveSession = async (
   // Define 3 months in milliseconds (approx 30 days per month)
   let threeMonths = 1000 * 60 * 60 * 24 * 30 * 3;
 
-  if (process.env.NODE_ENV === "development") threeMonths = 1000 * 60 * 5; // 5 minutes
+  if (process.env.NODE_ENV === "development") threeMonths = 1000 * 60 * 10; // 10 minutes
 
   // Check if any session that was bought within last 3 months
   const activeSession = sessions.find(

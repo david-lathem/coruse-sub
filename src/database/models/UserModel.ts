@@ -10,6 +10,9 @@ class User {
 
   @prop({ default: true })
   public hasSubActive!: Boolean;
+
+  @prop({ default: false })
+  public reminderSent?: Boolean;
 }
 
 export const UserModel = getModelForClass(User);
