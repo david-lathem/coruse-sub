@@ -1,5 +1,7 @@
 export const MESSAGE_CONFIG = {
-  SUB_FINISHED: `⚠️ 你的會籍已到期，請點擊以下連結完成續訂以維持權限。
+  SUB_FINISHED: `⚠️ 你的會籍已到期，請點擊以下連結完成續訂以維持權限
+
+續訂會籍時，請務必使用報名時相同的電子郵件，否則無法恢復權限❗
 
 🔁 [1 個月訂閱](${process.env.ONE_MONTH_LINK})  
 🔁 [3 個月訂閱](${process.env.THREE_MONTH_LINK})

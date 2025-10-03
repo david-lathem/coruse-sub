@@ -6,6 +6,7 @@ export const searchStripeCustomersByEmail = async (
 ): Promise<Stripe.Customer[]> => {
   const customers = await stripe.customers.search({
     query: `email:'${email}'`,
+    limit: 100,
   });
 
   console.log(customers);
