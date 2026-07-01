@@ -14,6 +14,7 @@ declare global {
 
       FREE_MEMBER_ROLE_ID: string;
       SUBSCRIBED_MEMBER_ROLE_ID: string;
+      VIDEO_ONLY_ROLE_ID: string;
       PERMANENT_MEMBER_ROLE_ID: string;
     }
   }

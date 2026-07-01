@@ -2,10 +2,11 @@ import Stripe from "stripe";
 import { getCustomerFullAccessSession } from "../stripe/functions.js";
 
 export const getAnyActiveSession = async (
-  customers: Stripe.Customer[]
+  customers: Stripe.Customer[],
+  videoOnly: Boolean = false,
 ): Promise<Stripe.Checkout.Session | undefined> => {
   const sessions = await Promise.all(
-    customers.map((c) => getCustomerFullAccessSession(c.id))
+    customers.map((c) => getCustomerFullAccessSession(c.id, videoOnly)),
   ); // get each checkout session for full access product for each customer id since only one is created
 
   // we verify here if 3 months have been passed since he bought this
@@ -17,7 +18,7 @@ export const getAnyActiveSession = async (
 
   // Check if any session that was bought within last 3 months
   const activeSession = sessions.find(
-    (s) => s && Date.now() - s.created * 1000 < threeMonths
+    (s) => s && Date.now() - s.created * 1000 < threeMonths,
   );
 
   return activeSession;

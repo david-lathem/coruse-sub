@@ -6,3 +6,10 @@
 6. When someone buys, payment intent creates, customer creates, charge succeeds, payment mehtod attahced, intent succed, chekcout sessio complete
 7. Paymen intent doesnt include any useful data for identifying what product user boguht, includes amount. so we grab checkout usign customer id andpayment link id which help us identify.
 8. When someone buys one time + subcribtion, two customer are created. So in verify we use loop to get all customers and get checkout for full time
+
+
+It creates a doc when user verifies (it gets all customers found by the email then find a chekcout session for full payment aka 3 months using each customer id)  if found within last three months, it creates a doc!
+
+then on cron job, it checks if still within 3 months time, if so all good. if not, it'll check if each customer id found by email has any active sub!
+
+new feat: vidoe only role

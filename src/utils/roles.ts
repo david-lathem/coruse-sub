@@ -12,6 +12,23 @@ export const removeSubscriptionRoleIfExists = async (member: GuildMember) => {
   return true;
 };
 
+export const removeVideoRoleIfExists = async (member: GuildMember) => {
+  if (!member.roles.cache.has(process.env.VIDEO_ONLY_ROLE_ID)) return;
+
+  await member.roles.add(process.env.FREE_MEMBER_ROLE_ID);
+
+  await member.roles.remove(process.env.VIDEO_ONLY_ROLE_ID);
+  return true;
+};
+
+export const addVideoRoleIfNotExists = async (member: GuildMember) => {
+  if (member.roles.cache.has(process.env.VIDEO_ONLY_ROLE_ID)) return;
+
+  await member.roles.remove(process.env.FREE_MEMBER_ROLE_ID);
+  await member.roles.add(process.env.VIDEO_ONLY_ROLE_ID);
+  return true;
+};
+
 export const addSubscriptionRoleIfNotExists = async (member: GuildMember) => {
   if (member.roles.cache.has(process.env.SUBSCRIBED_MEMBER_ROLE_ID)) return;
 

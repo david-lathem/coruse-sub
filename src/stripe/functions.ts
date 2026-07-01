@@ -2,7 +2,7 @@ import Stripe from "stripe";
 import stripe from "./index.js";
 
 export const searchStripeCustomersByEmail = async (
-  email: string
+  email: string,
 ): Promise<Stripe.Customer[]> => {
   const customers = await stripe.customers.search({
     query: `email:'${email}'`,
@@ -15,23 +15,26 @@ export const searchStripeCustomersByEmail = async (
 };
 
 export const getCustomerFullAccessSession = async (
-  customerId: string
+  customerId: string,
+  videoOnly: Boolean = false,
 ): Promise<Stripe.Checkout.Session | undefined> => {
   const completedSessions = await stripe.checkout.sessions.list({
-    payment_link: process.env.FULL_ACCESS_PAYMENT_LINK,
+    payment_link: videoOnly
+      ? process.env.VIDEO_ONLY_PAYMENT_LINK
+      : process.env.FULL_ACCESS_PAYMENT_LINK,
     status: "complete",
     limit: 100,
   });
 
   const customerSession = completedSessions.data.find(
-    (s) => s.customer === customerId
+    (s) => s.customer === customerId,
   );
 
   return customerSession;
 };
 
 export const getCustomerActiveSubscriptions = async (
-  customerId: string
+  customerId: string,
 ): Promise<Stripe.Subscription[]> => {
   const activeSubscriptions = await stripe.subscriptions.list({
     customer: customerId,
