@@ -12,13 +12,13 @@ export default async (client: Client<true>) => {
   await registerAndAttachCommandsOnClient(client);
 
   CronJob.from({
-    cronTime: "0 */1 * * * *",
+    cronTime: "0 */10 * * * *",
     start: true,
     onTick: () => checkCustomerSubscriptions(client),
   });
 
   CronJob.from({
-    cronTime: "0 */1 * * * *",
+    cronTime: "0 */10 * * * *",
     start: true,
     onTick: () => checkCustomerVideoOnly(client),
   });
